@@ -1,36 +1,39 @@
 var LinkedList = function() {
   var list = {};
-  list.head = null;
-  list.tail = null;
+  list.head = Node();
+  list.tail = Node();
 
   list.addToTail = function(value) {
-    
     var findTail = function(node) {
-      if ( node ) { // Does this node have something to point to / is it last node?
-        findTail(node.next); // If it's not last node, then perform recursion on the node that current node is pointing to.
+      if ( node.next === null ) { // Does this node have something to point to / is it last node?
+        node.value = value;
+        node.next = Node();
+        list.tail = node;
       } else { // If this node is the last node,
-        node = Node(value); // add to tail by using Node function
-        if ( !list.head ) { //  If first time through, then 
-          list.head = node; // Assign the first node as the head node, too
-        }
-        list.tail.value = node.value; // Reassign new tail to list.tail
+        node.next = findTail(node.next); // add to tail by using Node function
       }
+      return node;
     };
-    
-    
-
-    findTail(list.head); // Initiating recursion with current head
+    list.head = findTail(list.head); // Initiating recursion with current head
   };
 
   list.removeHead = function() {  
-    console.log(list);
-    var removedHead = list.head.value; // Declare previous head value
-    list.head.value = list.head.next;
-    // list.next = list.next.next;
-    return removedHead;
+    var oldHeadValue = list.head.value;
+    list.head = list.head.next;
+    return oldHeadValue;
   };
 
   list.contains = function(target) {
+    var findTarget = function(node) {
+      if ( node.next === null ) {
+        return false;
+      } else if ( node.value === target ) {
+        return true;
+      } else {
+        return findTarget(node.next);
+      }
+    };
+    return findTarget(list.head);
   };
 
   return list;
@@ -38,7 +41,6 @@ var LinkedList = function() {
 
 var Node = function(value) {
   var node = {};
-
   node.value = value;
   node.next = null;
   return node;
