@@ -56,15 +56,11 @@ Graph.prototype.forEachNode = function(cb) {
  * Complexity: What is the time complexity of the above functions?
  */
 
-// var connectToFive = function(item) {
-//   graph.addEdge(item, 5);
-// };
-// graph.addNode(5);
-// graph.addNode(2);
-// graph.addNode(1);
-// graph.addNode(3);
-// graph.forEachNode(connectToFive);
-// expect(graph.hasEdge(2, 5)).to.equal(true);
-// expect(graph.hasEdge(1, 5)).to.equal(true);
-// expect(graph.hasEdge(3, 5)).to.equal(true);
-// expect(graph.hasEdge(5, 5)).to.equal(true);
+/* addNode: O(1)
+   removeNode: O(1)
+   contains: 0(1)
+   hasEdge: O(n)
+   addEdge: O(1)
+   removeEdge: O(n)
+   forEachNode: 0(n)
+*/
