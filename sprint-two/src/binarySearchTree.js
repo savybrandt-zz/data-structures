@@ -1,7 +1,9 @@
 var BinarySearchTree = function(value) {
   var tree = {value: value};
+  tree.list = [value];
 
   tree.insert = function(incoming) {
+    tree.list.push(incoming);
     var input = {value: incoming, left: undefined, right: undefined};
     var insertNode = function(node) {
       if (node.value > incoming) {
@@ -21,12 +23,25 @@ var BinarySearchTree = function(value) {
     insertNode(tree);
   };
 
-  tree.contains = function() {
-
+  tree.contains = function(target) {
+    var flag = false;
+    var searchNode = function(node) {
+      if (node.value === target) {
+        flag = true;
+      } else if (node.left) {
+        searchNode(node.left);
+      } if (node.right) {
+        searchNode(node.right);
+      }
+    };
+    searchNode(tree);
+    return flag;
   };
 
-  tree.depthFirstLog = function() {
-
+  tree.depthFirstLog = function(fn) {
+    for (var i = 0; i < tree.list.length; i++) {
+      fn(tree.list[i]);
+    }
   };
 
   return tree;
@@ -36,11 +51,3 @@ var BinarySearchTree = function(value) {
 /*
  * Complexity: What is the time complexity of the above functions?
  */
-
-// See if 1st branch is empty
-  // if not, fill it
-  // if it is, then check if our incoming val is larger than the branch value
-    // if is, check branch.right
-    // if not, 
-
-
