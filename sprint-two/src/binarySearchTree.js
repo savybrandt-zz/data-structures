@@ -1,5 +1,5 @@
 var BinarySearchTree = function(value) {
-  var tree = {value: value};
+  var tree = {value: value, left: undefined, right: undefined};
   tree.list = [value];
 
   tree.insert = function(incoming) {

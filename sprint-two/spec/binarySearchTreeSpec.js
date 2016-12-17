@@ -36,4 +36,19 @@ describe('binarySearchTree', function() {
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3]);
   });
+
+  it('should only allow two children per node', function() {
+    var flag = true;
+    var searchNode = function(node) {
+      if ( Object.keys(node).length !== 3 ) {
+        flag = false;
+      } else if (node.left) {
+        searchNode(node.left);
+      } if (node.right) {
+        searchNode(node.right);
+      }
+    };
+    searchNode(binarySearchTree);
+    return flag;
+  });
 });

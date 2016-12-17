@@ -47,6 +47,11 @@ describe('hashTable', function() {
     window.getIndexBelowMaxForKey = oldHashFunction;
   });
 
+  it('should not contain any other properties besides this._storage and this._limit', function() {
+    var keys = Object.keys(hashTable);
+    expect(keys.length).to.equal(2);
+  });
+
   // (Advanced! Remove the extra "x" when you want the following tests to run)
   xit ('should double in size when needed', function() {
     _.each(people, function(person) {

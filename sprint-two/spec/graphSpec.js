@@ -69,7 +69,15 @@ describe('graph', function() {
     expect(graph.hasEdge(5, 5)).to.equal(true);
   });
 
-  it('should not allow nodes to add edges to themselves', function() {
-    
+  it('should accept differnt types of value for node', function() {
+    graph.addNode('Savy');
+    graph.addNode('DJ');
+    expect(graph.contains('DJ')).to.equal(true);
+    graph.addEdge('Savy', 'DJ');
+    expect(graph.hasEdge('Savy', 'DJ')).to.equal(true);
+    graph.removeNode('Savy');
+    expect(graph.contains('Savy')).to.equal(false);
   });
+
+  // if time, right an additl. test: check if nodes all have at least 1 edge (requires refactoring graph.js)
 });
