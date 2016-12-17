@@ -41,4 +41,11 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('should be able to add an unlimited amount of children to each node', function() {
+    for (var i = 0; i < 1000; i++) {
+      tree.addChild(i);
+    }
+    expect(tree.children.length).to.equal(1000);
+  });
+
 });

@@ -51,5 +51,9 @@ describe('linkedList', function() {
     expect(linkedList.contains(4)).to.equal(false);
   });
 
-  // add more tests here to test the functionality of linkedList
+  it('should not use arrays to store nodes', function() {
+    expect(typeof linkedList.head).to.equal('object');
+    expect(typeof linkedList.tail).to.equal('object');
+  });
+
 });
