@@ -1,20 +1,20 @@
 var LinkedList = function() {
   var list = {};
-  list.head = Node();
-  list.tail = Node();
+  list.head = null;
+  list.tail = null;
 
   list.addToTail = function(value) {
-    var findTail = function(node) {
-      if ( node.next === null ) { // Does this node have something to point to / is it last node?
-        node.value = value;
-        node.next = Node();
-        list.tail = node;
-      } else { // If this node is the last node,
-        node.next = findTail(node.next); // add to tail by using Node function
-      }
-      return node;
-    };
-    list.head = findTail(list.head); // Initiating recursion with current head
+    var newTail = Node(value);
+    if ( !list.head ) {
+      list.head = newTail;
+    }
+
+    if ( list.tail ) {
+      list.tail.next = newTail;
+    }
+
+    list.tail = newTail;
+
   };
 
   list.removeHead = function() {  
@@ -24,16 +24,15 @@ var LinkedList = function() {
   };
 
   list.contains = function(target) {
-    var findTarget = function(node) {
-      if ( node.next === null ) {
-        return false;
-      } else if ( node.value === target ) {
+    var node = list.head;
+
+    while ( node ) {
+      if ( node.value === target ) {
         return true;
-      } else {
-        return findTarget(node.next);
       }
-    };
-    return findTarget(list.head);
+      node = node.next;
+    }
+    return false;
   };
 
   return list;

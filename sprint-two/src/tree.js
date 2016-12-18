@@ -1,71 +1,35 @@
 var Tree = function(value) {
   var newTree = {};
   newTree.value = value;
-  newTree.addChild = treeMethods.addChild;
-  newTree.contains = treeMethods.contains;
-  // your code here
-  newTree.children = [];  // fix me
-
+  newTree.children = [];
+  _.extend(newTree, treeMethods);
   return newTree;
 };
 
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
-  var child = {value: value, children: []};
+  var child = Tree(value);
   this.children.push(child);
-  child.addChild = treeMethods.addChild;
 };
 
 treeMethods.contains = function(target) {
-  var flag = false;
-  var searchTarget = function(node) {
-    var childrenArr = node.children;
-
-    for (var i = 0; i < childrenArr.length; i++) {
-      if (target === childrenArr[i].value) {
-        flag = true;
-      }
-      if (childrenArr[i].children) {
-        searchTarget(childrenArr[i]);
-      }
+  if ( this.value === target ) {
+    return true;
+  } 
+  for (var i = 0; i < this.children.length; i++) {
+    var child = this.children[i];
+    if ( child.contains(target) ) {
+      return true;
     }
-  };
-
-  searchTarget(this);
-  return flag;
+  }
+  return false;
 };
 
-
-// tree.addChild(5);
-// tree.children[0].addChild(6);
-// expect(tree.children[0].children[0].value).to.equal(6);
-
-// tree.addChild(5);
-// expect(tree.contains(5)).to.equal(true);
 
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ * addChild: O(1)
+ * contains: O(n)
  */
-
-//  var Tree = function(value) {
-//   var newTree = {};
-//   newTree.value = value;
-//   newTree.addChild = treeMethods.addChild;
-//   newTree.contains = treeMethods.contains;
-//   // your code here
-//   newTree.children = null;  // fix me
-
-//   return newTree;
-// };
-
-// var treeMethods = {};
-
-// treeMethods.addChild = function(value) {
-
-// };
-
-// treeMethods.contains = function(target) {
-
-// };
